@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diplomatic AI 🌍</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: #f4f7f6; color: #333; line-height: 1.6; }
+        header { background: #1b365d; color: white; padding: 20px; text-align: center; }
+        header h1 { font-size: 2rem; }
+        header p { font-size: 1rem; opacity: 0.9; }
+        .container { max-width: 900px; margin: 20px auto; padding: 0 15px; }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        @media (max-width: 768px) { .grid { grid-template-columns: 1fr; } }
+        .card { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.08); }
+        .card h2 { color: #1b365d; margin-bottom: 15px; border-bottom: 2px solid #eef2f5; padding-bottom: 8px; }
+        #chat-box { height: 250px; overflow-y: auto; border: 1px solid #e0e0e0; padding: 10px; border-radius: 5px; background: #fafafa; margin-bottom: 10px; }
+        .message { margin-bottom: 10px; padding: 8px 12px; border-radius: 6px; font-size: 0.95rem; }
+        .user-msg { background: #dcf8c6; align-self: flex-end; margin-left: 20%; text-align: right; }
+        .bot-msg { background: #e8ecef; margin-right: 20%; }
+        .input-group { display: flex; gap: 8px; }
+        input[type="text"] { flex: 1; padding: 10px; border: 1px solid #ccc; border-radius: 5px; outline: none; }
+        button { background: #007bff; color: white; border: none; padding: 10px 18px; border-radius: 5px; cursor: pointer; font-weight: bold; }
+        button:hover { background: #0056b3; }
+        .news-item { padding: 10px 0; border-bottom: 1px solid #eee; }
+        .news-item:last-child { border-bottom: none; }
+        .news-title { font-weight: bold; color: #0056b3; }
+        .news-date { font-size: 0.8rem; color: #777; }
+        footer { text-align: center; padding: 20px; color: #666; font-size: 0.85rem; margin-top: 20px; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Diplomatic AI 🌍</h1>
+        <p>Making World Politics & Global News Easy for Everyone</p>
+    </header>
+
+    <div class="container">
+        <div class="grid">
+            <!-- News Feed Section -->
+            <div class="card">
+                <h2>📰 World News Updates</h2>
+                <div id="news-container">
+                    <div class="news-item">
+                        <div class="news-title">Global Peace Talks Progress in Middle East</div>
+                        <p>Diplomats meet to negotiate ceasefires and facilitate international aid distribution.</p>
+                        <span class="news-date">Verified News • Educational Briefing</span>
+                    </div>
+                    <div class="news-item">
+                        <div class="news-title">Pakistan & Regional Foreign Policy Updates</div>
+                        <p>Key highlights on foreign trade agreements and bilateral diplomatic delegations.</p>
+                        <span class="news-date">Verified News • Diplomatic Signal</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AI Chatbot Section -->
+            <div class="card">
+                <h2>🤖 Diplomatic Assistant</h2>
+                <div id="chat-box">
+                    <div class="message bot-msg">
+                        <strong>Diplomatic AI:</strong> Welcome! Ask me anything about international relations, ongoing conflicts, or peace diplomacy in simple language.
+                    </div>
+                </div>
+                <div class="input-group">
+                    <input type="text" id="user-input" placeholder="Ask a question (e.g., What is diplomacy?)...">
+                    <button onclick="sendMessage()">Send</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p><strong>Responsible AI Notice:</strong> Information provided is for educational and news literacy purposes.</p>
+    </footer>
+
+    <script>
+        function sendMessage() {
+            const input = document.getElementById('user-input');
+            const message = input.value.trim();
+            if (!message) return;
+
+            const chatBox = document.getElementById('chat-box');
+            
+            // Add User Message
+            const userDiv = document.createElement('div');
+            userDiv.className = 'message user-msg';
+            userDiv.innerHTML = '<strong>You:</strong> ' + message;
+            chatBox.appendChild(userDiv);
+
+            input.value = '';
+
+            // Simple Bot Response Logic
+            setTimeout(() => {
+                const botDiv = document.createElement('div');
+                botDiv.className = 'message bot-msg';
+                
+                let response = "Diplomacy refers to managing international relations and conducting negotiations between nations peacefully.";
+                
+                const lowerMsg = message.toLowerCase();
+                if (lowerMsg.includes('pakistan')) {
+                    response = "Pakistan's foreign policy focuses on regional peace, economic trade, and bilateral diplomatic ties with key nations.";
+                } else if (lowerMsg.includes('war') || lowerMsg.includes('conflict')) {
+                    response = "International law and diplomatic channels aim to resolve conflicts through dialogues, ceasefires, and mediation.";
+                } else if (lowerMsg.includes('hello') || lowerMsg.includes('hi')) {
+                    response = "Hello! Ask me any question related to world news, international affairs, or foreign policy.";
+                }
+
+                botDiv.innerHTML = '<strong>Diplomatic AI:</strong> ' + response;
+                chatBox.appendChild(botDiv);
+                chatBox.scrollTop = chatBox.scrollHeight;
+            }, 600);
+        }
+    </script>
+</body>
+</html>
